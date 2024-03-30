@@ -6,8 +6,10 @@ import org.example.skills.entity.Enum.Category;
 import java.util.List;
 
 public interface SkillsService {
-    List<SkillsDTO> showAllSkillss();
-    List<SkillsDTO> findSkillsByCategory(Category category);
+
+    List<SkillsDTO> showAllSkills(Long id_user);
+
+    List<SkillsDTO> findSkillsByCategory(Category category, Long userId);
     SkillsDTO getSkillsById(Long id);
     SkillsDTO addSkills(SkillsDTO skillsDTO);
     SkillsDTO updateSkills(Long id ,SkillsDTO skillsDTO);

@@ -19,16 +19,16 @@ public class SkillsServiceImpl implements SkillsService {
     @Autowired
     ModelMapper modelMapper;
     @Override
-    public List<SkillsDTO> showAllSkillss() {
-        List<Skills> skills = skillsRepository.findByDeletedFalse();
+    public List<SkillsDTO> showAllSkills(Long userId) {
+        List<Skills> skills = skillsRepository.findByDeletedFalseAndUserId(userId);
         return skills.stream()
                 .map(s -> modelMapper.map(s,SkillsDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<SkillsDTO> findSkillsByCategory(Category category) {
-        List<Skills> skills = skillsRepository.findSkillsByCategoryAndDeletedFalse(category);
+    public List<SkillsDTO> findSkillsByCategory(Category category, Long userId) {
+        List<Skills> skills = skillsRepository.findSkillsByCategoryAndDeletedFalseAndUserId(category, userId);
         return skills.stream()
                 .map(s -> modelMapper.map(s,SkillsDTO.class))
                 .collect(Collectors.toList());

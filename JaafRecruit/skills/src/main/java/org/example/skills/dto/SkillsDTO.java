@@ -12,7 +12,7 @@ import org.example.skills.entity.Enum.Level;
 @Setter
 public class SkillsDTO {
     private Long id;
-    private Long id_user;
+    private Long userId;
     private String name;
     private Category category;
     private Level level;

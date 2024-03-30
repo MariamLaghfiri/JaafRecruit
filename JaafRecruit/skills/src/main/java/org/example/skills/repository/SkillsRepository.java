@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface SkillsRepository extends JpaRepository<Skills,Long> {
-    List<Skills> findByDeletedFalse();
-    List<Skills> findSkillsByCategoryAndDeletedFalse(Category category);
+    List<Skills> findByDeletedFalseAndUserId(Long userId);
+    List<Skills> findSkillsByCategoryAndDeletedFalseAndUserId(Category category, Long userId);
     Optional<Skills> findByIdAndDeletedFalse(Long id);
 }
