@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 public class ExperienceDTO {
     private Long id;
-    private Long id_user;
+    private Long userId;
     private String company_name;
     private String job_title;
     private String description;

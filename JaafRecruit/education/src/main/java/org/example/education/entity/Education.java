@@ -15,7 +15,7 @@ public class Education {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long id_user;
+    private Long userId;
     private String degree;
     private String institution;
     private LocalDate graduation_year;

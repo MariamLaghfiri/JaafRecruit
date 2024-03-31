@@ -17,8 +17,8 @@ public class EducationController {
     EducationServiceImpl educationServiceImpl;
 
     @GetMapping("/all")
-    public ResponseEntity<List<EducationDTO>> showAllEducations(){
-        List<EducationDTO> educationDTOS=educationServiceImpl.showAllEducations();
+    public ResponseEntity<List<EducationDTO>> showAllEducations(@RequestHeader Long userId){
+        List<EducationDTO> educationDTOS=educationServiceImpl.showAllEducations(userId);
         return new ResponseEntity<>(educationDTOS, HttpStatus.OK);
     }
     @GetMapping("/{id}")
@@ -27,12 +27,14 @@ public class EducationController {
         return new ResponseEntity<>(educationDTO, HttpStatus.OK);
     }
     @PostMapping("/add")
-    public ResponseEntity<EducationDTO> addEducation(@RequestBody EducationDTO educationDTO){
+    public ResponseEntity<EducationDTO> addEducation(@RequestBody EducationDTO educationDTO, @RequestHeader Long userId){
+        educationDTO.setUserId(userId);
         EducationDTO education=educationServiceImpl.addEducation(educationDTO);
         return new ResponseEntity<>(education, HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<EducationDTO> updateEducation(@RequestBody EducationDTO educationDTO, @PathVariable Long id){
+    public ResponseEntity<EducationDTO> updateEducation(@RequestBody EducationDTO educationDTO, @PathVariable Long id, @RequestHeader Long userId){
+        educationDTO.setUserId(userId);
         EducationDTO education=educationServiceImpl.updateEducation(id, educationDTO);
         return new ResponseEntity<>(education, HttpStatus.OK);
     }

@@ -15,7 +15,7 @@ public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long id_user;
+    private Long userId;
     private String company_name;
     private String job_title;
     private String description;

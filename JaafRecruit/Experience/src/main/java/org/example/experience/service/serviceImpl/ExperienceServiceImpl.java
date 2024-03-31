@@ -18,8 +18,8 @@ public class ExperienceServiceImpl implements ExperienceService {
     @Autowired
     ModelMapper modelMapper;
     @Override
-    public List<ExperienceDTO> showAllExperiences() {
-        List<Experience> experience = experienceRepository.findByDeletedFalse();
+    public List<ExperienceDTO> showAllExperiences(Long userId) {
+        List<Experience> experience = experienceRepository.findByDeletedFalseAndUserId(userId);
         return experience.stream()
                 .map(s -> modelMapper.map(s,ExperienceDTO.class))
                 .collect(Collectors.toList());

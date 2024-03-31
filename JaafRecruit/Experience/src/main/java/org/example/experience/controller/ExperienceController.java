@@ -17,8 +17,8 @@ public class ExperienceController {
     ExperienceServiceImpl experienceServiceImpl;
 
     @GetMapping("/all")
-    public ResponseEntity<List<ExperienceDTO>> showAllExperiences(){
-        List<ExperienceDTO> experienceDTOS=experienceServiceImpl.showAllExperiences();
+    public ResponseEntity<List<ExperienceDTO>> showAllExperiences(@RequestHeader Long userId){
+        List<ExperienceDTO> experienceDTOS=experienceServiceImpl.showAllExperiences(userId);
         return new ResponseEntity<>(experienceDTOS, HttpStatus.OK);
     }
     @GetMapping("/{id}")
@@ -27,12 +27,14 @@ public class ExperienceController {
         return new ResponseEntity<>(experienceDTO, HttpStatus.OK);
     }
     @PostMapping("/add")
-    public ResponseEntity<ExperienceDTO> addExperience(@RequestBody ExperienceDTO experienceDTO){
+    public ResponseEntity<ExperienceDTO> addExperience(@RequestBody ExperienceDTO experienceDTO, @RequestHeader Long userId){
+        experienceDTO.setUserId(userId);
         ExperienceDTO experience=experienceServiceImpl.addExperience(experienceDTO);
         return new ResponseEntity<>(experience, HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<ExperienceDTO> updateExperience(@RequestBody ExperienceDTO experienceDTO, @PathVariable Long id){
+    public ResponseEntity<ExperienceDTO> updateExperience(@RequestBody ExperienceDTO experienceDTO, @PathVariable Long id, @RequestHeader Long userId){
+        experienceDTO.setUserId(userId);
         ExperienceDTO experience=experienceServiceImpl.updateExperience(id, experienceDTO);
         return new ResponseEntity<>(experience, HttpStatus.OK);
     }

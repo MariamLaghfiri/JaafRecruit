@@ -18,8 +18,8 @@ public class EducationServiceImpl implements EducationService {
     @Autowired
     ModelMapper modelMapper;
     @Override
-    public List<EducationDTO> showAllEducations() {
-        List<Education> education = educationRepository.findByDeletedFalse();
+    public List<EducationDTO> showAllEducations(Long userId) {
+        List<Education> education = educationRepository.findByDeletedFalseAndUserId(userId);
         return education.stream()
                 .map(s -> modelMapper.map(s,EducationDTO.class))
                 .collect(Collectors.toList());

@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface ExperienceRepository extends JpaRepository<Experience,Long> {
-    List<Experience> findByDeletedFalse();
+    List<Experience> findByDeletedFalseAndUserId(Long userId);
     Optional<Experience> findByIdAndDeletedFalse(Long id);
 }

@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface EducationRepository extends JpaRepository<Education,Long> {
-    List<Education> findByDeletedFalse();
+    List<Education> findByDeletedFalseAndUserId(Long userId);
     Optional<Education> findByIdAndDeletedFalse(Long id);
 }

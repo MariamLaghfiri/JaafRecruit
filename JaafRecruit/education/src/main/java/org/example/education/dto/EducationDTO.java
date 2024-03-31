@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 public class EducationDTO {
     private Long id;
-    private Long id_user;
+    private Long userId;
     private String degree;
     private String institution;
     private LocalDate graduation_year;
