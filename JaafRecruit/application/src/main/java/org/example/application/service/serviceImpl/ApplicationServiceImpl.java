@@ -42,7 +42,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public ApplicationDTO getApplicationById(Long id) {
-        Application application= applicationRepository.findById(id).get();
+        Application application;
+        application = applicationRepository.findById(id).get();
         return modelMapper.map(application, ApplicationDTO.class);
     }
 
