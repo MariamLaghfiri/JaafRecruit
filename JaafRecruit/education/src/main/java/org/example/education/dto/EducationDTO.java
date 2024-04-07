@@ -14,6 +14,6 @@ public class EducationDTO {
     private Long userId;
     private String degree;
     private String institution;
-    private LocalDate graduation_year;
+    private LocalDate graduationYear;
     private Boolean deleted;
 }

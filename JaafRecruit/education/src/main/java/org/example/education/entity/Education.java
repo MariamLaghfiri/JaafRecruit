@@ -18,7 +18,7 @@ public class Education {
     private Long userId;
     private String degree;
     private String institution;
-    private LocalDate graduation_year;
+    private LocalDate graduationYear;
     @Column(name="is_deleted", columnDefinition = "boolean default false")
     private Boolean deleted;
 }
