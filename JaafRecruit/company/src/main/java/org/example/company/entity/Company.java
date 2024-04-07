@@ -15,7 +15,7 @@ public class Company {
     private Long id;
     private Long userId;
     private String name;
-    private int employee_number;
+    private int employeeNumber;
     private String description;
     private String website;
     private String industry;
