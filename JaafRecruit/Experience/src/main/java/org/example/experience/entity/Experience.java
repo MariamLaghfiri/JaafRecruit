@@ -16,11 +16,11 @@ public class Experience {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
-    private String company_name;
-    private String job_title;
+    private String companyName;
+    private String jobTitle;
     private String description;
-    private LocalDate start_date;
-    private LocalDate end_date;
+    private LocalDate startDate;
+    private LocalDate endDate;
     @Column(name="is_deleted", columnDefinition = "boolean default false")
     private Boolean deleted;
 }
