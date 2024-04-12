@@ -1,0 +1,446 @@
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+            <img src="/assets/img/logo.png" alt="">
+            <span class="d-none d-lg-block">JaafRecruit</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link collapsed " href="/jobseeker-dashboard">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-heading">Pages</li>
+
+        <!-- Profile Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link " href="/jobseeker-profile">
+                <i class="bi bi-caret-down-fill"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+        <!-- End Profile Page Nav -->
+
+      <!-- Skills Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/jobseeker-skills">
+          <i class="bi bi-caret-down-fill"></i>
+          <span>Skills</span>
+        </a>
+      </li>
+      <!-- End Skills Page Nav -->
+
+      <!-- Education Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/jobseeker-education">
+          <i class="bi bi-caret-down-fill"></i>
+          <span>Education</span>
+        </a>
+      </li>
+      <!-- End Education Page Nav -->
+
+      <!-- Experiance Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/jobseeker-experiance">
+          <i class="bi bi-caret-down-fill"></i>
+          <span>Experiance</span>
+        </a>
+      </li>
+      <!-- End Experiance Page Nav -->
+
+        <!-- Job Posting Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/job-posting">
+                <i class="bi bi-caret-down-fill"></i>
+                <span>Job Posting</span>
+            </a>
+        </li>
+        <!-- End Job Posting Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/contact-admin">
+                <i class="bi bi-caret-down-fill"></i>
+                <span>Contact Admin</span>
+            </a>
+        </li>
+        <!-- End Contact Admin Page Nav -->
+    </ul>
+
+</aside><!-- End Sidebar-->
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Profile</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">job seeker</li>
+                <li class="breadcrumb-item active">Profile</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                    data-bs-target="#profile-overview">Overview</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit
+                                    Profile</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#skills">Skills</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab"
+                                    data-bs-target="#experiance">Experiance</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab"
+                                    data-bs-target="#education">Education</button>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content pt-2">
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                                    <img src="assets/img/profile-foto.jpg" alt="Profile" class="rounded-circle">
+                                    <h2>Name</h2>
+                                    <h3>description</h3>
+                                    <div class="social-links mt-2">
+                                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                                    </div>
+                                </div>
+
+                                <h5 class="card-title"><i class="bi bi-file-text"></i> Resume :</h5>
+                                <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores
+                                    cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure
+                                    rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at
+                                    unde.</p>
+
+                                <h5 class="card-title"><i class="bi bi-file-text"></i> Cover letter :</h5>
+                                <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores
+                                    cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure
+                                    rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at
+                                    unde.</p>
+
+                                <h5 class="card-title"><i class="bi bi-credit-card-2-front"></i> Profile Details</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-geo-alt"></i> Address</div>
+                                    <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-telephone"></i> Phone</div>
+                                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-envelope-at"></i> Email</div>
+                                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-list-stars"></i> Skills</div>
+                                    <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-briefcase"></i> Experiance
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">Web Designer</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-briefcase"></i> Education</div>
+                                    <div class="col-lg-9 col-md-8">USA</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-calendar-check"></i>
+                                        Availability</div>
+                                    <div class="col-lg-9 col-md-8">Full Time</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-briefcase"></i> Desired Job
+                                        Titles</div>
+                                    <div class="col-lg-9 col-md-8">Web Designer</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-coin"></i> Desired Salary Range
+                                    </div>
+                                    <div class="col-lg-9 col-md-8">USA</div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                                <!-- Profile Edit Form -->
+                                <form>
+
+                                    <div class="row mb-3">
+                                        <label for="resume" class="col-md-4 col-lg-3 col-form-label">Resune </label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <textarea name="resume" type="text" class="form-control" id="resume"
+                                                value="resume"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="coverLetter" class="col-md-4 col-lg-3 col-form-label">Cover
+                                            Letter</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <textarea name="coverLetter" type="text" class="form-control"
+                                                id="coverLetter" value="coverLetterress"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="desiredJobTitle" class="col-md-4 col-lg-3 col-form-label">Desired
+                                            Job Title</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="desiredJobTitle" type="text" class="form-control"
+                                                id="desiredJobTitle" value="Desired Job Title">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="desiredSalaryRange" class="col-md-4 col-lg-3 col-form-label">Desired
+                                            Salary Range</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="desiredSalaryRange" type="text" class="form-control"
+                                                id="desiredSalaryRange" value="desired Salary Range">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="availability"
+                                            class="col-md-4 col-lg-3 col-form-label">Availability</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="form-select" id="availability"
+                                                aria-label="Default select example">
+                                                <option value="FULL_TIME">Full Time</option>
+                                                <option value="PART_TIME">Part Time</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="linkedin" type="text" class="form-control" id="Linkedin"
+                                                value="https://linkedin.com/#">
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </form><!-- End Profile Edit Form -->
+
+                            </div>
+
+                            <div class="tab-pane fade pt-3" id="skills">
+
+                                <!-- skills Form -->
+                                <form>
+
+                                    <div class="row mb-3">
+                                        <label for="desiredJobTitle" class="col-md-4 col-lg-3 col-form-label">
+                                            Skill Name</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="name" type="text" class="form-control" id="name"
+                                                placeholder="skill name">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="category" class="col-md-4 col-lg-3 col-form-label">Category</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="form-select" id="category"
+                                                aria-label="Default select example">
+                                                <option value="TECHNICAL">Technical</option>
+                                                <option value="SOFT_SKILLS">Soft Skills</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="level" class="col-md-4 col-lg-3 col-form-label">Level</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="form-select" id="level" aria-label="Default select example">
+                                                <option value="BEGINNER">Beginner</option>
+                                                <option value="INTERMEDIATE">Intermediate</option>
+                                                <option value="EXPERT">Expert</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form><!-- End skills Form -->
+
+                            </div>
+
+                            <div class="tab-pane fade pt-3" id="experiance">
+
+                                <!-- experiance Form -->
+                                <form>
+
+                                    <div class="row mb-3">
+                                        <label for="companyName" class="col-md-4 col-lg-3 col-form-label">
+                                            Company Name</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="companyName" type="text" class="form-control" id="companyName"
+                                                placeholder="company name">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="jobTitle" class="col-md-4 col-lg-3 col-form-label">
+                                            Job Title</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="jobTitle" type="text" class="form-control" id="jobTitle"
+                                                placeholder="company name">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="description" class="col-md-4 col-lg-3 col-form-label">
+                                            Description</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <textarea name="description" class="form-control" id="description"
+                                                placeholder="company name"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="inputDate" class="col-sm-2 col-form-label">Start Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="inputDate" class="col-sm-2 col-form-label">End Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form><!-- End experiance Form -->
+
+                            </div>
+
+                            <div class="tab-pane fade pt-3" id="education">
+
+                                <!-- education Form -->
+                                <form>
+
+                                    <div class="row mb-3">
+                                        <label for="degree" class="col-md-4 col-lg-3 col-form-label">
+                                            Degree</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="degree" type="text" class="form-control" id="degree"
+                                                placeholder="company name">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="institution" class="col-md-4 col-lg-3 col-form-label">
+                                            Institution</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="institution" type="text" class="form-control" id="institution"
+                                                placeholder="company name">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="graduationYear" class="col-sm-2 col-form-label">Graduation Year</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" name="graduationYear" id="graduationYear" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </form><!-- End education Form -->
+
+                            </div>
+
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
