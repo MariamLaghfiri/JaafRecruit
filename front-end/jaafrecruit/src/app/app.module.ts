@@ -14,7 +14,8 @@ import { RecruiterDashboardComponent } from './components/recruter/recruiter-das
 import { SkillsComponent } from './components/job-seeker/skills/skills.component';
 import { EducationComponent } from './components/job-seeker/education/education.component';
 import { ExperienceComponent } from './components/job-seeker/experience/experience.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from"@angular/common/http"
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,9 @@ import { ExperienceComponent } from './components/job-seeker/experience/experien
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

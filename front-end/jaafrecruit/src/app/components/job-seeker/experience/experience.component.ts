@@ -13,26 +13,26 @@ export class ExperienceComponent {
 
   constructor() { }
 
-  // Method to open the update experience modal
-  openUpdateModal(experience: Experience): void {
-    this.selectedExperience = experience;
-    ($('#updateExperienceModal') as any).modal('show');
-  }
+  // // Method to open the update experience modal
+  // openUpdateModal(experience: Experience): void {
+  //   this.selectedExperience = experience;
+  //   ($('#updateExperienceModal') as any).modal('show');
+  // }
 
-  // Method to close the update experience modal
-  closeUpdateModal(): void {
-    this.selectedExperience = null;
-    ($('#updateExperienceModal') as any).modal('hide');
-  }
+  // // Method to close the update experience modal
+  // closeUpdateModal(): void {
+  //   this.selectedExperience = null;
+  //   ($('#updateExperienceModal') as any).modal('hide');
+  // }
 
-  // Method to update the experience details
-  updateExperience(): void {
-    if (this.selectedExperience) {
-      // Implement update logic here
-      console.log('Updating experience:', this.selectedExperience);
-      this.closeUpdateModal(); // Close the modal after updating
-    }
-  }
+  // // Method to update the experience details
+  // updateExperience(): void {
+  //   if (this.selectedExperience) {
+  //     // Implement update logic here
+  //     console.log('Updating experience:', this.selectedExperience);
+  //     this.closeUpdateModal(); // Close the modal after updating
+  //   }
+  // }
 
 
   experienceData: Experience[] = [
