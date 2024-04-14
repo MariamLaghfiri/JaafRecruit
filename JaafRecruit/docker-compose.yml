@@ -1,6 +1,22 @@
 version: '3.1'
 
 services:
+
+  jaafrecruit-db:
+    container_name: jaafrecruit-db
+    image: postgres:16
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - jaafrecruit-db:/data/postgres
+    ports:
+      - "5222:5432"
+    networks:
+      - db
+    restart: unless-stopped
+
   postgres:
     container_name: postgres-keycloak
     image: postgres:16
@@ -36,3 +52,4 @@ networks:
 
 volumes:
   postgres_data:
+  jaafrecruit-db:
