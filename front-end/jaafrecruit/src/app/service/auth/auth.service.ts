@@ -18,4 +18,16 @@ export class AuthService {
   login(loginObj:any){
     return this.http.post<any>(this.loginUrl, loginObj)
   }
+
+  storToken(tokenValue: string){
+    localStorage.setItem('token', tokenValue);
+  }
+
+  getToken(){
+    localStorage.getItem('token');
+  }
+
+  isLoggedIn(): boolean{
+    return !!localStorage.getItem('token');
+  }
 }

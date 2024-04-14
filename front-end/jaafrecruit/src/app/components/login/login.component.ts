@@ -39,6 +39,7 @@ export class LoginComponent {
       .subscribe({
         next:(res)=>{
           console.log("success");
+          this.auth.storToken(res.access_token);
           this.router.navigate(['jobseeker-dashboard']);
         },
         error:(err)=>{
