@@ -9,6 +9,7 @@ import org.example.user.service.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -46,6 +47,9 @@ public class UserController {
         userDTO.setRegistrationDate(LocalDate.now());
         userDTO.setDeleted(false);
         String userKeycloakId = createUserInKeycloak(userDTO);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hashedPassword = encoder.encode(userDTO.getPassword());
+        userDTO.setPassword(hashedPassword);
         userDTO.setUserKeycloakId(userKeycloakId);
         keycloakService.assignRoleToUser(userKeycloakId, userDTO.getRole());
         UserDTO user=userService.addUser(userDTO);
