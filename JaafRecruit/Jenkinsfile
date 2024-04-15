@@ -1,58 +1,29 @@
 pipeline {
-    agent any tools {
-        maven 'Maven'
-        jdk 'java17'
-        git 'git'
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "Maven"
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/MariamLaghfiri/JaafRecruit/tree/main/JaafRecruit'
-            }
-        }
-
         stage('Build') {
             steps {
-                script {
+                // Get some code from a GitHub repository
+                git 'https://github.com/MariamLaghfiri/JaafRecruit.git'
 
-                    def microservices=['config-server','discovery','geteway','user','skills','education','Experience','job-seeker','job-posting','company','application']
-                    microservices.each {
-                        service ->dir(service) {
-                            if (isUnix()) {
-                                sh 'mvn clean install'
-                            }
-
-                            else {
-                                bat 'mvn clean install'
-                            }
-                        }
-                    }
-                }
+                // Run Maven on a Unix agent.
+                bat "cd JaafRecruit && mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
 
         stage('Test') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/chaimyaham/Chic-Choice-backend.git'
+                git 'https://github.com/MariamLaghfiri/JaafRecruit.git'
 
                 // Run Maven on a Unix agent.
-                bat "mvn test"
-            }
-        }
-
-        post {
-            success {
-                echo 'Build succeeded!'
-            }
-
-            failure {
-                echo 'Build failed!'
-            }
-
-            unstable {
-                echo 'Build unstable!'
+                bat "cd JaafRecruit && mvn test"
             }
         }
     }
