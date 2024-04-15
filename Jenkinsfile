@@ -13,9 +13,8 @@ pipeline {
                 git 'https://github.com/MariamLaghfiri/JaafRecruit.git'
 
                 // Run Maven
-                dir('JaafRecruit') {
-                    bat "mvn -Dmaven.test.failure.ignore=true clean package"
-                }
+                    bat "cd JaafRecruit && mvn -Dmaven.test.failure.ignore=true clean package"
+                
             }
         }
         stage('Test') {
@@ -24,9 +23,8 @@ pipeline {
                 git 'https://github.com/MariamLaghfiri/JaafRecruit.git'
 
                 // Run Maven
-                dir('JaafRecruit') {
-                    bat "mvn test"
-                }
+                    bat "cd JaafRecruit && mvn test"
+                
             }
         }
     }
