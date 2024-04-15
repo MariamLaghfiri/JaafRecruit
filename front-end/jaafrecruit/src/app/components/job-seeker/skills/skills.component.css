@@ -1,0 +1,28 @@
+.addbutton {
+    margin-bottom: 20px;
+    margin-left: 75%;
+}
+
+.delbutton {
+    margin-left: 6px;
+}
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-select .hidden-select {
+    display: none;
+}
+
+.custom-select .bi-filter {
+    cursor: pointer;
+    /* Add additional styling as needed */
+}
+
+.fi {
+    font-size: 20px;
+    margin-right: 50px;
+    color: rgb(6, 6, 112);
+}

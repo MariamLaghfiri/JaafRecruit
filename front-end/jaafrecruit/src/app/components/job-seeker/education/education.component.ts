@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Education } from 'src/app/models/education';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-education',
@@ -7,6 +8,9 @@ import { Education } from 'src/app/models/education';
   styleUrls: ['./education.component.css']
 })
 export class EducationComponent {
+  
+  constructor(private auth: AuthService){}
+
   educationData: Education[] = [
     { id: 1, degree: 'Bachelor of Science', institution: 'ABC University', graduationYear: new Date('2022-05-31') },
     { id: 2, degree: 'Master of Arts', institution: 'XYZ College', graduationYear: new Date('2023-06-30') }
@@ -21,4 +25,5 @@ export class EducationComponent {
     console.log('Delete education with ID:', id);
     this.educationData = this.educationData.filter(edu => edu.id !== id); // Remove the education item from the array
   }
+
 }

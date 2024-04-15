@@ -15,6 +15,7 @@ export class LoginComponent {
   eyeIcon: string = "bi bi-eye-slash";
 
   loginForm!: FormGroup;
+  errorMessage!: string;
 
   constructor(private fb: FormBuilder, private auth: AuthService,private router: Router) { }
 
@@ -40,10 +41,17 @@ export class LoginComponent {
         next:(res)=>{
           console.log("success");
           this.auth.storToken(res.access_token);
+          console.log('token :',this.auth.getToken());
           this.router.navigate(['jobseeker-dashboard']);
         },
-        error:(err)=>{
-          console.log("error");
+        error: (error) => {
+          if (error.status === 500) {
+            // Handle 401 Unauthorized error
+            this.errorMessage = 'Invalid username or password';
+          } else {
+            // Handle other errors
+            this.errorMessage = 'An error occurred';
+          }
         }
       })
     }

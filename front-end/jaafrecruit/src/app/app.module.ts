@@ -14,8 +14,12 @@ import { RecruiterDashboardComponent } from './components/recruter/recruiter-das
 import { SkillsComponent } from './components/job-seeker/skills/skills.component';
 import { EducationComponent } from './components/job-seeker/education/education.component';
 import { ExperienceComponent } from './components/job-seeker/experience/experience.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from"@angular/common/http"
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from"@angular/common/http"
+import { TokenInterceptor } from './interceptor/token.interceptor';
+import { CategoryFilterPipe } from './filters/category-filter.pipe';
+import { HeaderComponent } from './components/header/header.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,15 +33,22 @@ import { HttpClientModule } from"@angular/common/http"
     RecruiterDashboardComponent,
     SkillsComponent,
     EducationComponent,
-    ExperienceComponent
+    ExperienceComponent,
+    CategoryFilterPipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

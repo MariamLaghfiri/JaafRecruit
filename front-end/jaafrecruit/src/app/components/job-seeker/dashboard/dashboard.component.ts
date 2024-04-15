@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
  
+  constructor(private auth: AuthService){}
+
   jobData = [
     { id: 1, jobTitle: 'Software Developer', contract: 'Full-Time', jobType: 'Permanent', applicationStatus: 'ACCEPTED' },
     { id: 2, jobTitle: 'Web Designer', contract: 'Part-Time', jobType: 'Contract', applicationStatus: 'PENDING' },
@@ -25,5 +28,5 @@ export class DashboardComponent {
         return 'badge bg-secondary'; 
     }
   }
-  
+
 }

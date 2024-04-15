@@ -11,6 +11,7 @@ import { RecruiterDashboardComponent } from './components/recruter/recruiter-das
 import { EducationComponent } from './components/job-seeker/education/education.component';
 import { SkillsComponent } from './components/job-seeker/skills/skills.component';
 import { ExperienceComponent } from './components/job-seeker/experience/experience.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,43 +20,51 @@ const routes: Routes = [
   },
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: "register",
-    component: RegisterComponent
+    component: RegisterComponent,
   },
   {
     path: "jobseeker-dashboard",
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [authGuard]
   },
   {
     path: "jobseeker-profile",
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [authGuard]
   },
   {
     path: "jobseeker-skills",
-    component: SkillsComponent
+    component: SkillsComponent,
+    canActivate: [authGuard]
   },
   {
     path: "jobseeker-education",
-    component: EducationComponent
+    component: EducationComponent,
+    canActivate: [authGuard]
   },
   {
     path: "jobseeker-experiance",
-    component: ExperienceComponent
+    component: ExperienceComponent,
+    canActivate: [authGuard]
   },
   {
     path: "contact-admin",
-    component: ContactAdminComponent
+    component: ContactAdminComponent,
+    canActivate: [authGuard]
   },
   {
     path: "job-posting",
-    component: JobPostingComponent
+    component: JobPostingComponent,
+    canActivate: [authGuard]
   },
   {
     path: "recruter-dashboard",
-    component: RecruiterDashboardComponent
+    component: RecruiterDashboardComponent,
+    canActivate: [authGuard]
   }
 ];
 

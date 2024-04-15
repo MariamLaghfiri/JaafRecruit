@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Experience } from 'src/app/models/experience';
 import * as $ from 'jquery';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-experience',
@@ -11,7 +12,7 @@ export class ExperienceComponent {
 
   selectedExperience: Experience | null = null;
 
-  constructor() { }
+  constructor(private auth: AuthService){}
 
   // // Method to open the update experience modal
   // openUpdateModal(experience: Experience): void {

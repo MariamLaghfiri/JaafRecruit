@@ -19,34 +19,45 @@
                                     <h5 class="card-title text-center pb-0 fs-4">Login</h5>
                                 </div>
 
+                                <div *ngIf="errorMessage" class="error-message text-danger">
+                                    {{ errorMessage }}
+                                </div>
+
                                 <form [formGroup]="loginForm" class="row g-3 needs-validation" novalidate>
 
                                     <div class="col-12">
                                         <label for="yourUsername" class="form-label">Username</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="text" formControlName="username" class="form-control" id="yourUsername"
-                                                required>
+                                            <input type="text" formControlName="username" class="form-control"
+                                                id="yourUsername" required>
                                         </div>
-                                        <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-danger">Please enter your username!</small>
+                                        <small
+                                            *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')"
+                                            class="text-danger">Please enter your username!</small>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="password" class="form-label">Password</label>
                                         <div class="input-group has-validation">
-                                            <span class="input-group-text" (click)="hideShowPassword()" id="inputGroupPrepend"><i class="{{eyeIcon}}"></i></span>
-                                            <input [type]="type" formControlName="password" class="form-control" id="password"
-                                                required>
+                                            <span class="input-group-text" (click)="hideShowPassword()"
+                                                id="inputGroupPrepend"><i class="{{eyeIcon}}"></i></span>
+                                            <input [type]="type" formControlName="password" class="form-control"
+                                                id="password" required>
                                         </div>
                                         <!-- <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')"  class="text-danger">Please enter your password!, (Password must be at least 6 characters long)</small> -->
-                                        <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
-                                            <div *ngIf="loginForm.hasError('required','password')" class="text-danger">Password is required.</div>
-                                            <div *ngIf="loginForm.hasError('minlength','password')" class="text-danger">Password must be at least 6 characters long.</div>
-                                          </div>
+                                        <div
+                                            *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+                                            <div *ngIf="loginForm.hasError('required','password')" class="text-danger">
+                                                Password is required.</div>
+                                            <div *ngIf="loginForm.hasError('minlength','password')" class="text-danger">
+                                                Password must be at least 6 characters long.</div>
+                                        </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <button [disabled]="loginForm.invalid" (click)="onLogin()" class="btn btn-primary w-100" type="submit">Login</button>
+                                        <button [disabled]="loginForm.invalid" (click)="onLogin()"
+                                            class="btn btn-primary w-100" type="submit">Login</button>
                                     </div>
                                     <div class="col-12">
                                         <p class="small mb-0">Don't have account? <a href="/register">Create

@@ -1,34 +1,3 @@
-<!-- ======= Header ======= -->
-<header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img src="/assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">JaafRecruit</span>
-        </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
-
-    <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </form>
-    </div><!-- End Search Bar -->
-
-    <nav class="header-nav ms-auto">
-        <ul class="d-flex align-items-center">
-
-            <li class="nav-item d-block d-lg-none">
-                <a class="nav-link nav-icon search-bar-toggle " href="#">
-                    <i class="bi bi-search"></i>
-                </a>
-            </li><!-- End Search Icon-->
-
-        </ul>
-    </nav><!-- End Icons Navigation -->
-
-</header><!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -115,27 +84,23 @@
 
     <section class="section dashboard">
         <div class="row">
-
             <!-- Left side columns -->
             <div class="col-12">
                 <div class="row">
-
-                    <!-- Job Applications -->
+                    <button class="col-3 btn btn-primary align-items-right addbutton" (click)="openAddSkillModal()">Add
+                        New</button>
+                    <!-- Skills -->
                     <div class="col-12">
                         <div class="card job-applications overflow-auto">
 
                             <!-- filter -->
                             <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
+                                <select [(ngModel)]="selectedCategory">
+                                    <option value="">All</option>
+                                    <option value="TECHNICAL">Technical Skills</option>
+                                    <option value="SOFT_SKILLS">Soft Skills</option>
+                                   </select>
                             </div>
 
                             <div>
@@ -150,7 +115,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let skill of skillsData">
+                                        <tr *ngFor="let skill of skillsData | categoryFilter:selectedCategory">
                                             <td>{{ skill.name }}</td>
                                             <td>
                                                 <span [ngClass]="getCategoryClass(skill.category)">
@@ -160,8 +125,8 @@
                                             <td>{{ skill.level }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-primary"
-                                                    (click)="updateSkill(skill)">Update</button>
-                                                <button class="btn btn-sm btn-danger"
+                                                    (click)="openUpdateModal(skill)">Update</button>
+                                                <button class="btn btn-sm btn-danger delbutton"
                                                     (click)="deleteSkill(skill.id)">Delete</button>
                                             </td>
                                         </tr>
@@ -176,5 +141,110 @@
 
         </div>
     </section>
+
+    <!-- Add Skill Modal -->
+    <div class="modal fade" id="addSkillModal" tabindex="-1" aria-labelledby="addSkillModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSkillModalLabel">Add Skill</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addSkillForm" (ngSubmit)="addSkill(addSkillForm.value)" novalidate>
+                        <div class="mb-3">
+                            <label for="skillName" class="form-label">Skill Name</label>
+                            <input type="text" class="form-control" id="skillName" formControlName="name" required>
+                            <div *ngIf="addSkillForm.controls['name'].invalid && (addSkillForm.controls['name'].dirty || addSkillForm.controls['name'].touched)"
+                                class="invalid-feedback">
+                                Skill name is required.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="skillCategory" class="form-label">Category</label>
+                            <select class="form-select" id="skillCategory" formControlName="category" required>
+                                <option value="TECHNICAL">Technical</option>
+                                <option value="SOFT_SKILLS">Soft Skills</option>
+                            </select>
+                            <div *ngIf="addSkillForm.controls['category'].invalid && (addSkillForm.controls['category'].dirty || addSkillForm.controls['category'].touched)"
+                                class="invalid-feedback">
+                                Category is required.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="skillLevel" class="form-label">Level</label>
+                            <select class="form-select" id="skillLevel" formControlName="level" required>
+                                <option value="BEGINNER">Beginner</option>
+                                <option value="INTERMEDIATE">Intermediate</option>
+                                <option value="EXPERT">Expert</option>
+                            </select>
+                            <div *ngIf="addSkillForm.controls['level'].invalid && (addSkillForm.controls['level'].dirty || addSkillForm.controls['level'].touched)"
+                                class="invalid-feedback">
+                                Level is required.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" [disabled]="addSkillForm.invalid">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="closeAddModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Skill Modal -->
+    <div class="modal fade" id="updateSkillModal" tabindex="-1" aria-labelledby="updateSkillModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateSkillModalLabel">Update Skill</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="updateSkillForm" (ngSubmit)="updateSkill(updateSkillForm.value)" novalidate>
+                        <div class="form-group hidden">
+                           <input type="hidden" formControlName="id">
+                        </div>
+                        <div class="form-group">
+                           <label for="skillName">Skill Name</label>
+                           <input type="text" class="form-control" id="skillName" formControlName="name" required>
+                           <div *ngIf="updateSkillForm.controls['name'].invalid && (updateSkillForm.controls['name'].dirty || updateSkillForm.controls['name'].touched)" class="invalid-feedback">
+                             Skill name is required.
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label for="skillCategory">Category</label>
+                           <select class="form-select" id="skillCategory" formControlName="category" required>
+                             <option value="TECHNICAL">Technical</option>
+                             <option value="SOFT_SKILLS">Soft Skills</option>
+                           </select>
+                           <div *ngIf="updateSkillForm.controls['category'].invalid && (updateSkillForm.controls['category'].dirty || updateSkillForm.controls['category'].touched)" class="invalid-feedback">
+                             Category is required.
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label for="skillLevel">Level</label>
+                           <select class="form-select" id="skillLevel" formControlName="level" required>
+                             <option value="BEGINNER">Beginner</option>
+                             <option value="INTERMEDIATE">Intermediate</option>
+                             <option value="EXPERT">Expert</option>
+                           </select>
+                           <div *ngIf="updateSkillForm.controls['level'].invalid && (updateSkillForm.controls['level'].dirty || updateSkillForm.controls['level'].touched)" class="invalid-feedback">
+                             Level is required.
+                           </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" [disabled]="updateSkillForm.invalid">Update</button>
+                       </form>
+                       
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main><!-- End #main -->

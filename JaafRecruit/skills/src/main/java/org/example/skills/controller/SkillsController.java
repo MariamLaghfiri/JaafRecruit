@@ -35,12 +35,14 @@ public class SkillsController {
     @PostMapping("/add")
     public ResponseEntity<SkillsDTO> addSkills(@RequestBody SkillsDTO skillsDTO, @RequestHeader Long userId){
         skillsDTO.setUserId(userId);
+        skillsDTO.setDeleted(false);
         SkillsDTO skills=skillsServiceImpl.addSkills(skillsDTO);
         return new ResponseEntity<>(skills, HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<SkillsDTO> updateSkills(@RequestBody SkillsDTO skillsDTO, @PathVariable Long id, @RequestHeader Long userId){
         skillsDTO.setUserId(userId);
+        skillsDTO.setDeleted(false);
         SkillsDTO skills=skillsServiceImpl.updateSkills(id, skillsDTO);
         return new ResponseEntity<>(skills, HttpStatus.OK);
     }
