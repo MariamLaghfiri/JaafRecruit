@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/experience")
@@ -29,20 +30,22 @@ public class ExperienceController {
     @PostMapping("/add")
     public ResponseEntity<ExperienceDTO> addExperience(@RequestBody ExperienceDTO experienceDTO, @RequestHeader Long userId){
         experienceDTO.setUserId(userId);
+        experienceDTO.setDeleted(false);
         ExperienceDTO experience=experienceServiceImpl.addExperience(experienceDTO);
         return new ResponseEntity<>(experience, HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<ExperienceDTO> updateExperience(@RequestBody ExperienceDTO experienceDTO, @PathVariable Long id, @RequestHeader Long userId){
         experienceDTO.setUserId(userId);
+        experienceDTO.setDeleted(false);
         ExperienceDTO experience=experienceServiceImpl.updateExperience(id, experienceDTO);
         return new ResponseEntity<>(experience, HttpStatus.OK);
     }
     @DeleteMapping("delete/{id}")
-    public HashMap<String,Boolean> deleteExperience(@PathVariable(value = "id") Long id){
+    public Map<String,Boolean> deleteExperience(@PathVariable(value = "id") Long id){
         ExperienceDTO experienceDTO=experienceServiceImpl.getExperienceById(id);
         HashMap<String,Boolean> response=new HashMap<>();
-        if(experienceServiceImpl.deleteExperience(experienceDTO)){
+        if(Boolean.TRUE.equals(experienceServiceImpl.deleteExperience(experienceDTO))){
             response.put("delete",Boolean.TRUE);
         }
         return response;

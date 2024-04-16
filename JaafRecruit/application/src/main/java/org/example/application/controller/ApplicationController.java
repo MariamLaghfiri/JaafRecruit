@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/application")
@@ -47,7 +48,7 @@ public class ApplicationController {
         return new ResponseEntity<>(application, HttpStatus.CREATED);
     }
     @PutMapping("accept/{id}")
-    public HashMap<String,AppStatus> acceptApplication(@PathVariable(value = "id") Long id){
+    public Map<String,AppStatus> acceptApplication(@PathVariable(value = "id") Long id){
         ApplicationDTO applicationDTO=applicationServiceImpl.getApplicationById(id);
         HashMap<String,AppStatus> response=new HashMap<>();
         if(applicationServiceImpl.acceptApplication(applicationDTO) == AppStatus.ACCEPTED){

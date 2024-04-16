@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/education")
@@ -29,20 +30,22 @@ public class EducationController {
     @PostMapping("/add")
     public ResponseEntity<EducationDTO> addEducation(@RequestBody EducationDTO educationDTO, @RequestHeader Long userId){
         educationDTO.setUserId(userId);
+        educationDTO.setDeleted(false);
         EducationDTO education=educationServiceImpl.addEducation(educationDTO);
         return new ResponseEntity<>(education, HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<EducationDTO> updateEducation(@RequestBody EducationDTO educationDTO, @PathVariable Long id, @RequestHeader Long userId){
         educationDTO.setUserId(userId);
+        educationDTO.setDeleted(false);
         EducationDTO education=educationServiceImpl.updateEducation(id, educationDTO);
         return new ResponseEntity<>(education, HttpStatus.OK);
     }
     @DeleteMapping("delete/{id}")
-    public HashMap<String,Boolean> deleteEducation(@PathVariable(value = "id") Long id){
+    public Map<String,Boolean> deleteEducation(@PathVariable(value = "id") Long id){
         EducationDTO educationDTO=educationServiceImpl.getEducationById(id);
         HashMap<String,Boolean> response=new HashMap<>();
-        if(educationServiceImpl.deleteEducation(educationDTO)){
+        if(Boolean.TRUE.equals(educationServiceImpl.deleteEducation(educationDTO))){
             response.put("delete",Boolean.TRUE);
         }
         return response;

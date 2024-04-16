@@ -29,12 +29,14 @@ public class CompanyController {
     @PostMapping("/add")
     public ResponseEntity<CompanyDTO> addCompany(@RequestBody CompanyDTO companyDTO , @RequestHeader Long userId){
         companyDTO.setUserId(userId);
+        companyDTO.setDeleted(false);
         CompanyDTO company=companyServiceImpl.addCompany(companyDTO);
         return new ResponseEntity<>(company, HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<CompanyDTO> updateCompany(@RequestBody CompanyDTO companyDTO, @PathVariable Long id, @RequestHeader Long userId){
         companyDTO.setUserId(userId);
+        companyDTO.setDeleted(false);
         CompanyDTO company=companyServiceImpl.updateCompany(id, companyDTO);
         return new ResponseEntity<>(company, HttpStatus.OK);
     }

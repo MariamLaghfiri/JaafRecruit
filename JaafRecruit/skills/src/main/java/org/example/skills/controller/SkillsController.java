@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/skills")
@@ -40,18 +41,17 @@ public class SkillsController {
         return new ResponseEntity<>(skills, HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<SkillsDTO> updateSkills(@RequestBody SkillsDTO skillsDTO, @PathVariable Long id, @RequestHeader String userId){
-        System.out.println(userId);
-        skillsDTO.setUserId(Long.valueOf(userId));
+    public ResponseEntity<SkillsDTO> updateSkills(@RequestBody SkillsDTO skillsDTO, @PathVariable Long id, @RequestHeader Long userId){
+        skillsDTO.setUserId(userId);
         skillsDTO.setDeleted(false);
         SkillsDTO skills=skillsServiceImpl.updateSkills(id, skillsDTO);
         return new ResponseEntity<>(skills, HttpStatus.OK);
     }
     @DeleteMapping("delete/{id}")
-    public HashMap<String,Boolean> deleteSkills(@PathVariable(value = "id") Long id){
+    public Map<String,Boolean> deleteSkills(@PathVariable(value = "id") Long id){
         SkillsDTO skillsDTO=skillsServiceImpl.getSkillsById(id);
         HashMap<String,Boolean> response=new HashMap<>();
-        if(skillsServiceImpl.deleteSkills(skillsDTO)){
+        if(Boolean.TRUE.equals(skillsServiceImpl.deleteSkills(skillsDTO))){
             response.put("delete",Boolean.TRUE);
         }
         return response;
