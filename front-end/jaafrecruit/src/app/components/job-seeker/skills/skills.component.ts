@@ -14,6 +14,7 @@ declare var bootstrap: any;
 export class SkillsComponent implements OnInit {
   skillsData: Skills[] = [];
   selectedCategory: string = '';
+  userIdtest: string = this.auth.getUserId() as string;
   userId: number = 1;
   addSkillForm!: FormGroup;
   index!: number;
@@ -21,6 +22,8 @@ export class SkillsComponent implements OnInit {
   constructor(private skillsService: SkillsService, private auth: AuthService) { }
 
   ngOnInit(): void {
+    console.log("hello");
+    console.log("user id : : ",this.auth.getUserId());
     this.fetchSkillsData();
     this.initForm();
     this.initUpdateForm()
@@ -49,6 +52,7 @@ export class SkillsComponent implements OnInit {
   fetchSkillsData(): void {
     this.skillsService.showAllSkills(this.userId).subscribe(data => {
       this.skillsData = data;
+      console.log('userId : ',this.userIdtest);
     });
   }
 

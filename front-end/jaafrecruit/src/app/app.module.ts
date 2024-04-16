@@ -19,6 +19,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from"@angular/common/http"
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { CategoryFilterPipe } from './filters/category-filter.pipe';
 import { HeaderComponent } from './components/header/header.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HeaderComponent } from './components/header/header.component';
     EducationComponent,
     ExperienceComponent,
     CategoryFilterPipe,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

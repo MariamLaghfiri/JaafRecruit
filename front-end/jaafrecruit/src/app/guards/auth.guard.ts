@@ -21,30 +21,3 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 }
-
-
-
-
-
-
-
-
-
-// export const authGuard: CanActivateFn = (route, state) => {
-
-//   const router = inject(Router);
-
-//   const token = localStorage.getItem('token');
-
-//   console.log('token : ', token)
-
-//   if(token){
-//     console.log('true')
-//     return true;
-//   }else{
-//     router.navigate(['login']);
-//     console.log('false')
-//     return false;
-//   }
-
-// };

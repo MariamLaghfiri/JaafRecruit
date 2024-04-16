@@ -2,14 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Skills } from 'src/app/models/skills';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SkillsService {
-  private apiUrl = 'http://localhost:4441/skills'; 
+  private apiUrl = 'http://localhost:8082/skills'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private auth:AuthService) { }
 
   showAllSkills(userId: number): Observable<Skills[]> {
     const headers = new HttpHeaders().set('userId', userId.toString());
@@ -17,7 +18,15 @@ export class SkillsService {
   }
 
   findSkillsByCategory(category: string, userId: number): Observable<Skills[]> {
-    const headers = new HttpHeaders().set('userId', userId.toString());
+    const userIdstr = this.auth.getUserId();
+    if (!userIdstr) {
+      console.error('User ID not found in JWT');
+      return new Observable(observer => {
+        observer.error('User ID not found in JWT');
+        observer.complete();
+      });
+    }
+    const headers = new HttpHeaders().set('userId', userIdstr);
     return this.http.get<Skills[]>(`${this.apiUrl}/get-by-category/${category}`, { headers });
   }
 

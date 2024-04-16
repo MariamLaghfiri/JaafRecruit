@@ -1,74 +1,5 @@
-
-<!-- ======= Sidebar ======= -->
-<aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/jobseeker-dashboard">
-                <i class="bi bi-grid"></i>
-                <span>Dashboard</span>
-            </a>
-        </li><!-- End Dashboard Nav -->
-
-        <li class="nav-heading">Pages</li>
-
-        <!-- Profile Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/jobseeker-profile">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Profile</span>
-            </a>
-        </li>
-        <!-- End Profile Page Nav -->
-
-        <!-- Skills Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/jobseeker-skills">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Skills</span>
-            </a>
-        </li>
-        <!-- End Skills Page Nav -->
-
-        <!-- Education Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link " href="/jobseeker-education">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Education</span>
-            </a>
-        </li>
-        <!-- End Education Page Nav -->
-
-        <!-- Experiance Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/jobseeker-experiance">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Experiance</span>
-            </a>
-        </li>
-        <!-- End Experiance Page Nav -->
-
-        <!-- Job Posting Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/job-posting">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Job Posting</span>
-            </a>
-        </li>
-        <!-- End Job Posting Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/contact-admin">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Contact Admin</span>
-            </a>
-        </li>
-        <!-- End Contact Admin Page Nav -->
-    </ul>
-
-</aside><!-- End Sidebar-->
-
+<app-header></app-header>
+<app-sidebar></app-sidebar>
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -88,6 +19,7 @@
             <!-- Left side columns -->
             <div class="col-12">
                 <div class="row">
+                    <button class="col-3 btn btn-primary align-items-right addbutton" (click)="openAddEducationModal()">Add New</button>
 
                     <!-- Job Applications -->
                     <div class="col-12">
@@ -120,17 +52,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let education of educationData">
+                                        <tr *ngFor="let education of educations">
                                             <td>{{ education.id }}</td>
                                             <td>{{ education.degree }}</td>
                                             <td>{{ education.institution }}</td>
                                             <td>{{ education.graduationYear | date }}</td>
                                             <td>
                                                 <!-- Add update and delete buttons -->
-                                                <button class="btn btn-sm btn-primary"
-                                                    (click)="updateEducation(education)">Update</button>
-                                                <button class="btn btn-sm btn-danger"
-                                                    (click)="deleteEducation(education.id)">Delete</button>
+                                                <button class="btn btn-sm btn-primary" (click)="openUpdateEducationModal(education)">Update</button>
+                                                <button class="btn btn-sm btn-danger delbutton" (click)="deleteEducation(education.id)">Delete</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -140,9 +70,108 @@
                     </div><!-- End Recent Sales -->
                 </div>
             </div><!-- End Left side columns -->
-
-
         </div>
     </section>
+
+    <!-- Add Education Modal -->
+    <div class="modal fade" id="addEducationModal" tabindex="-1" aria-labelledby="addEducationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEducationModalLabel">Add Education</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addEducationForm" (ngSubmit)="addEducation(addEducationForm.value)" novalidate>
+                        <div class="form-group">
+                           <label for="degree">Degree</label>
+                           <input type="text" formControlName="degree" class="form-control" id="degree" [ngClass]="{ 'is-invalid': submitted && addEducationForm.controls['degree'].errors }" />
+                           <div *ngIf="submitted && addEducationForm.controls['degree'].errors" class="invalid-feedback">
+                             Degree is required.
+                           </div>
+                        </div>
+                       
+                        <div class="form-group">
+                           <label for="institution">Institution</label>
+                           <input type="text" formControlName="institution" class="form-control" id="institution" [ngClass]="{ 'is-invalid': submitted && addEducationForm.controls['institution'].errors }" />
+                           <div *ngIf="submitted && addEducationForm.controls['institution'].errors" class="invalid-feedback">
+                             Institution is required.
+                           </div>
+                        </div>
+                       
+                        <div class="form-group">
+                           <label for="graduationYear">Graduation Year</label>
+                           <input type="date" formControlName="graduationYear" class="form-control" id="graduationYear" [ngClass]="{ 'is-invalid': submitted && addEducationForm.controls['graduationYear'].errors }" />
+                           <div *ngIf="submitted && addEducationForm.controls['graduationYear'].errors" class="invalid-feedback">
+                             Graduation Year is required.
+                           </div>
+                        </div>
+                       
+                        <div class="form-group">
+                           <button type="submit" class="btn btn-primary" [disabled]="addEducationForm.invalid">Add Education</button>
+                        </div>
+                       </form>
+                       
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="closeAddModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Education Modal -->
+    <div class="modal fade" id="updateEducationModal" tabindex="-1" aria-labelledby="updateEducationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEducationModalLabel">Update Education</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="updateEducationForm" (ngSubmit)="updateEducation(updateEducationForm.value)" novalidate>
+                        <div class="form-group">
+                           <input type="hidden" formControlName="id" id="id">
+                        </div>
+                       
+                        <div class="form-group">
+                           <label for="degree">Degree</label>
+                           <input type="text" formControlName="degree" class="form-control" id="degree" [ngClass]="{ 'is-invalid': submitted && addEducationForm.controls['degree'].errors }" />
+                           <div *ngIf="submitted && addEducationForm.controls['degree'].errors" class="invalid-feedback">
+                             Degree is required.
+                           </div>
+                        </div>
+                       
+                        <div class="form-group">
+                           <label for="institution">Institution</label>
+                           <input type="text" formControlName="institution" class="form-control" id="institution" [ngClass]="{ 'is-invalid': submitted && updateEducationForm.controls['institution'].errors }" />
+                           <div *ngIf="submitted && addEducationForm.controls['institution'].errors" class="invalid-feedback">
+                            Institution is required.
+                           </div>
+                        </div>
+                       
+                        <div class="form-group">
+                           <label for="graduationYear">Graduation Year</label>
+                           <input type="date" formControlName="graduationYear" class="form-control" id="graduationYear" [ngClass]="{ 'is-invalid': submitted && updateEducationForm.controls['graduationYear'].errors }" />
+                           <div *ngIf="submitted && addEducationForm.controls['graduationYear'].errors" class="invalid-feedback">
+                            Graduation Year is required.
+                           </div>
+                        </div>
+                       
+                        <div class="form-group">
+                           <button type="submit" class="btn btn-primary" [disabled]="updateEducationForm.invalid">Update Education</button>
+                        </div>
+                       </form>
+                       
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main><!-- End #main -->

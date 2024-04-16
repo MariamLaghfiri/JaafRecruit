@@ -1,75 +1,6 @@
-<!-- ======= Sidebar ======= -->
-<aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/jobseeker-dashboard">
-                <i class="bi bi-grid"></i>
-                <span>Dashboard</span>
-            </a>
-        </li><!-- End Dashboard Nav -->
-
-        <li class="nav-heading">Pages</li>
-
-        <!-- Profile Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/jobseeker-profile">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Profile</span>
-            </a>
-        </li>
-        <!-- End Profile Page Nav -->
-
-        <!-- Skills Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/jobseeker-skills">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Skills</span>
-            </a>
-        </li>
-        <!-- End Skills Page Nav -->
-
-        <!-- Education Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/jobseeker-education">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Education</span>
-            </a>
-        </li>
-        <!-- End Education Page Nav -->
-
-        <!-- Experiance Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link " href="/jobseeker-experiance">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Experiance</span>
-            </a>
-        </li>
-        <!-- End Experiance Page Nav -->
-
-        <!-- Job Posting Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/job-posting">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Job Posting</span>
-            </a>
-        </li>
-        <!-- End Job Posting Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/contact-admin">
-                <i class="bi bi-caret-down-fill"></i>
-                <span>Contact Admin</span>
-            </a>
-        </li>
-        <!-- End Contact Admin Page Nav -->
-    </ul>
-
-</aside><!-- End Sidebar-->
-
+<app-header></app-header>
+<app-sidebar></app-sidebar>
 <main id="main" class="main">
-
     <div class="pagetitle">
         <h1>Experience</h1>
         <nav>
@@ -83,29 +14,14 @@
 
     <section class="section dashboard">
         <div class="row">
-
             <!-- Left side columns -->
             <div class="col-12">
                 <div class="row">
-
-                    <!-- Job Applications -->
+                    <button class="col-3 btn btn-primary align-items-right addbutton" (click)="openAddExperienceModal()">Add New</button>
+                    <!-- Experience -->
                     <div class="col-12">
                         <div class="card job-applications overflow-auto">
-
-                            <!-- filter -->
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
+                            <!-- Experience List -->
                             <div>
                                 <h2></h2>
                                 <table class="table">
@@ -127,48 +43,97 @@
                                             <td>{{ experience.startDate | date }}</td>
                                             <td>{{ experience.endDate | date }}</td>
                                             <td>
-                                                <button class="btn btn-sm btn-primary"
-                                                   >Update</button>
-                                                <button class="btn btn-sm btn-danger"
-                                                    (click)="deleteExperience(experience.id)">Delete</button>
+                                                <button class="btn btn-sm btn-primary" (click)="openUpdateExperienceModal(experience)">Update</button>
+                                                <button class="btn btn-sm btn-danger delbutton" (click)="deleteExperience(experience.id)">Delete</button>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-
-                                <!-- Modal for updating experience -->
-                                <div class="modal" id="updateExperienceModal" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Update Experience</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- Update experience form -->
-                                                <form >
-                                                    <!-- Form fields for updating experience -->
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </div><!-- End Recent Sales -->
+                    </div><!-- End Experience List -->
                 </div>
             </div><!-- End Left side columns -->
-
-
         </div>
     </section>
 
+    <!-- Add Experience Modal -->
+    <div class="modal fade" id="addExperienceModal" tabindex="-1" aria-labelledby="addExperienceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addExperienceModalLabel">Add Experience</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addExperienceForm" (ngSubmit)="addExperience(addExperienceForm.value)" novalidate>
+                        <div class="mb-3">
+                          <label for="companyName" class="form-label">Company Name</label>
+                          <input type="text" class="form-control" id="companyName" formControlName="companyName">
+                        </div>
+                        <div class="mb-3">
+                          <label for="jobTitle" class="form-label">Job Title</label>
+                          <input type="text" class="form-control" id="jobTitle" formControlName="jobTitle">
+                        </div>
+                        <div class="mb-3">
+                          <label for="description" class="form-label">Description</label>
+                          <textarea class="form-control" id="description" formControlName="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label for="startDate" class="form-label">Start Date</label>
+                          <input type="date" class="form-control" id="startDate" formControlName="startDate">
+                        </div>
+                        <div class="mb-3">
+                          <label for="endDate" class="form-label">End Date</label>
+                          <input type="date" class="form-control" id="endDate" formControlName="endDate">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Experience</button>
+                      </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeAddModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Experience Modal -->
+    <div class="modal fade" id="updateExperienceModal" tabindex="-1" aria-labelledby="updateExperienceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateExperienceModalLabel">Update Experience</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="updateExperienceForm" (ngSubmit)="updateExperience(updateExperienceForm.value)" novalidate>
+                        <div class="mb-3">
+                          <label for="companyName" class="form-label">Company Name</label>
+                          <input type="text" class="form-control" id="companyName" formControlName="companyName">
+                        </div>
+                        <div class="mb-3">
+                          <label for="jobTitle" class="form-label">Job Title</label>
+                          <input type="text" class="form-control" id="jobTitle" formControlName="jobTitle">
+                        </div>
+                        <div class="mb-3">
+                          <label for="description" class="form-label">Description</label>
+                          <textarea class="form-control" id="description" formControlName="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label for="startDate" class="form-label">Start Date</label>
+                          <input type="date" class="form-control" id="startDate" formControlName="startDate">
+                        </div>
+                        <div class="mb-3">
+                          <label for="endDate" class="form-label">End Date</label>
+                          <input type="date" class="form-control" id="endDate" formControlName="endDate">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Experience</button>
+                      </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main><!-- End #main -->

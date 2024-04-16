@@ -1,64 +1,157 @@
-import { Component } from '@angular/core';
-import { Experience } from 'src/app/models/experience';
-import * as $ from 'jquery';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Experience } from 'src/app/models/experience'; // Assuming you have an Experience model
+import { ExperienceService } from 'src/app/service/experience/experience.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-experience',
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.css']
 })
-export class ExperienceComponent {
+export class ExperienceComponent implements OnInit {
+  experienceData: Experience[] = [];
+  userId: number = 1;
+  index!: number;
+  addExperienceForm!: FormGroup;
+  updateExperienceForm!: FormGroup;
+  constructor(private experienceService: ExperienceService, private auth: AuthService) { }
 
-  selectedExperience: Experience | null = null;
+  ngOnInit(): void {
+    this.fetchExperienceData();
+    this.initForm();
+    this.initUpdateForm();
+  }
 
-  constructor(private auth: AuthService){}
+  initForm(): void {
+    this.addExperienceForm = new FormGroup({
+      companyName: new FormControl('', Validators.required),
+      jobTitle: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required)
+    });
+  }
 
-  // // Method to open the update experience modal
-  // openUpdateModal(experience: Experience): void {
-  //   this.selectedExperience = experience;
-  //   ($('#updateExperienceModal') as any).modal('show');
-  // }
-
-  // // Method to close the update experience modal
-  // closeUpdateModal(): void {
-  //   this.selectedExperience = null;
-  //   ($('#updateExperienceModal') as any).modal('hide');
-  // }
-
-  // // Method to update the experience details
-  // updateExperience(): void {
-  //   if (this.selectedExperience) {
-  //     // Implement update logic here
-  //     console.log('Updating experience:', this.selectedExperience);
-  //     this.closeUpdateModal(); // Close the modal after updating
-  //   }
-  // }
-
-
-  experienceData: Experience[] = [
-    {
-      id: 1,
-      companyName: 'ABC Company',
-      jobTitle: 'Software Engineer',
-      description: 'Developed web applications using Angular and Node.js',
-      startDate: new Date('2022-01-01'),
-      endDate: new Date('2023-06-30')
-    },
-    {
-      id: 2,
-      companyName: 'XYZ Corporation',
-      jobTitle: 'Frontend Developer',
-      description: 'Worked on UI design and implemented responsive layouts',
-      startDate: new Date('2020-05-15'),
-      endDate: new Date('2021-12-31')
+  closeAddModal() {
+    var modalElement = document.getElementById('addExperienceModal');
+    if (modalElement) {
+      var modalInstance = new bootstrap.Modal(modalElement);
+      modalInstance.hide();
+      modalElement.setAttribute('aria-hidden', 'true');
+    } else {
+      console.error('Modal element not found');
     }
-    // Add more experiences as needed
-  ];
+  }
+
+  fetchExperienceData(): void {
+    this.experienceService.getAllExperiences(this.userId).subscribe(data => {
+      this.experienceData = data;
+    });
+  }
+
+  openAddExperienceModal(): void {
+    const modalElement = document.getElementById('addExperienceModal');
+    if (modalElement) {
+      const modalInstance = new bootstrap.Modal(modalElement);
+      modalInstance.show();
+    } else {
+      console.error('Modal element not found');
+    }
+  }
+
+  addExperience(formValues: any): void {
+    const newExperience: Experience = {
+      id: 0,
+      companyName: formValues.companyName,
+      jobTitle: formValues.jobTitle,
+      description: formValues.description,
+      startDate: new Date(formValues.startDate),
+      endDate: new Date(formValues.endDate)
+    };
+
+    this.experienceService.addExperience(newExperience, this.userId).subscribe(response => {
+      this.experienceData.push(response);
+      this.closeAddModal();
+    });
+  }
+
+  initUpdateForm(): void {
+    this.updateExperienceForm = new FormGroup({
+      id: new FormControl(''), // Hidden ID field
+      companyName: new FormControl('', Validators.required),
+      jobTitle: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required)
+    });
+  }
+
+  openUpdateExperienceModal(experience: Experience): void {
+    const index = this.experienceData.findIndex(e => e.id === experience.id);
+    if (index !== -1) {
+       this.index = index;
+       this.updateExperienceForm.setValue({
+         id: experience.id,
+         companyName: experience.companyName,
+         jobTitle: experience.jobTitle,
+         description: experience.description,
+         startDate: experience.startDate,
+         endDate: experience.endDate
+       });
+       // Open the modal
+       const modalElement = document.getElementById('updateExperienceModal');
+       if (modalElement) {
+         const modalInstance = new bootstrap.Modal(modalElement);
+         modalInstance.show();
+       } else {
+         console.error('Modal element not found');
+       }
+    }
+   }
+   
+  openUpdateModal(experience: Experience): void {
+    this.updateExperienceForm.setValue({
+      id: experience.id,
+      companyName: experience.companyName,
+      jobTitle: experience.jobTitle,
+      description: experience.description,
+      startDate: experience.startDate,
+      endDate: experience.endDate
+    });
+    // Open the modal
+    const modalElement = document.getElementById('updateExperienceModal');
+    const modalInstance = new bootstrap.Modal(modalElement);
+    modalInstance.show();
+  }
+
+  updateExperience(formValues: any): void {
+    const updatedExperience: Experience = {
+      id: formValues.id,
+      companyName: formValues.companyName,
+      jobTitle: formValues.jobTitle,
+      description: formValues.description,
+      startDate: new Date(formValues.startDate),
+      endDate: new Date(formValues.endDate)
+    };
+
+    this.experienceService.updateExperience(updatedExperience.id, updatedExperience, this.userId).subscribe(response => {
+      const index = this.experienceData.findIndex(e => e.id === updatedExperience.id);
+      if (index !== -1) {
+        this.experienceData[index] = updatedExperience;
+      }
+      // Close the modal
+      const modalElement = document.getElementById('updateExperienceModal');
+      const modalInstance = new bootstrap.Modal(modalElement);
+      modalInstance.hide();
+    });
+  }
 
   deleteExperience(id: number): void {
-    // Implement delete logic here
-    console.log('Delete experience with ID:', id);
-    this.experienceData = this.experienceData.filter(exp => exp.id !== id); // Remove the experience item from the array
+    this.experienceService.deleteExperience(id).subscribe(response => {
+      this.experienceData = this.experienceData.filter(e => e.id !== id);
+    });
   }
 }

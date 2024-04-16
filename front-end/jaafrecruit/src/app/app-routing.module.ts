@@ -12,6 +12,7 @@ import { EducationComponent } from './components/job-seeker/education/education.
 import { SkillsComponent } from './components/job-seeker/skills/skills.component';
 import { ExperienceComponent } from './components/job-seeker/experience/experience.component';
 import { authGuard } from './guards/auth.guard';
+import { loginGuard } from './guards/login/login.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
+    canActivate: [loginGuard]
   },
   {
     path: "register",

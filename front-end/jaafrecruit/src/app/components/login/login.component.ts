@@ -35,12 +35,15 @@ export class LoginComponent {
   onLogin(){
     if(this.loginForm.valid){
       console.log(this.loginForm.value);
+      
       //sende to DB
       this.auth.login(this.loginForm.value)
       .subscribe({
         next:(res)=>{
           console.log("success");
+          console.log("data : ", res);
           this.auth.storToken(res.access_token);
+          this.auth.storUserId(res.userId);
           console.log('token :',this.auth.getToken());
           this.router.navigate(['jobseeker-dashboard']);
         },
