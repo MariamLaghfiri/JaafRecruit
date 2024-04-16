@@ -40,8 +40,9 @@ public class SkillsController {
         return new ResponseEntity<>(skills, HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<SkillsDTO> updateSkills(@RequestBody SkillsDTO skillsDTO, @PathVariable Long id, @RequestHeader Long userId){
-        skillsDTO.setUserId(userId);
+    public ResponseEntity<SkillsDTO> updateSkills(@RequestBody SkillsDTO skillsDTO, @PathVariable Long id, @RequestHeader String userId){
+        System.out.println(userId);
+        skillsDTO.setUserId(Long.valueOf(userId));
         skillsDTO.setDeleted(false);
         SkillsDTO skills=skillsServiceImpl.updateSkills(id, skillsDTO);
         return new ResponseEntity<>(skills, HttpStatus.OK);
